@@ -275,6 +275,202 @@ section{
     }
 }
 
+.menu{
+    display: none;
+    position: fixed;
+    left: 5%;
+    z-index: 11;
+    background-color: white;
+    width: 90%;
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    grid-template-columns: 1fr;
+    top:12vh;
+}
+
+.sidebar{
+    .title{
+        padding: 2em;
+        text-align: center;
+        border-bottom: 1px solid gainsboro;
+    }
+}
+
+.meals{
+    display: none;
+}
+.meals-mobile{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5em 0;
+    border-bottom: 1px solid gainsboro;
+    i, path{
+        font-size: 1.2rem;
+        cursor: pointer;
+        &:hover{
+           color: $color-red;
+           fill: $color-red;
+        }
+    }
+    
+}
+.main{
+    min-width: 55%;
+}
+.pizza{
+    .info{
+        padding: 1em;
+        img{
+            margin-top: 1em;
+            border-radius: 10px;
+            max-width: 100%;
+        }
+    }
+    .type{
+        padding: 0.5em;
+        display: flex;
+        flex-direction: column;
+        .name{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1em;
+            h1{
+                font-size: 1.4rem;
+            }
+            p{
+                font-size: 0.7rem;
+            }
+        }
+        .size{
+            padding: 0.2em 0 1em;
+            margin: 0.5em 0 0.2em;
+
+            border-bottom: 1px solid gainsboro;
+            span{
+                font-family: 'Open Sans', sans-serif;
+                font-size: 0.8rem;
+                margin: 0.5em;
+                padding: 0.4em 0.6em;
+                border-radius: 50px;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                cursor: pointer;
+                color: $color-green;
+                &:last-of-type{ 
+                    color: $color-red;
+                }
+            }
+        }
+    }
+}
+.items{
+    border-bottom: 1px solid gainsboro;
+    h1{
+        font-size: 1rem;
+        margin-left: 1.5em;
+    }
+    div{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(25px, 1fr) );
+        justify-items: center;
+        padding: 0.7em;
+        span{
+            grid-column: 1/5;
+        }
+        select{
+            grid-column: 5/10;
+        }
+        i{
+            color: $color-red;
+            &:first-of-type{
+                color: $color-green;
+            }
+        }
+    }   
+}
+.add{
+    position: relative;
+    align-items: center;
+    margin-bottom: 2em;
+    p{
+        margin: 1em;
+    }
+    span{
+        font-family: 'Proza libre';
+        padding: 0.2em 1.5em;
+        position: absolute;
+        left: 40%;
+        top: 12%;
+        border-radius: 50px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        background-color: $color-green;
+        color: white;
+    }
+}
+
+.order{
+    .title{
+        font-size: 0.9rem;
+        text-align: center;
+        color: white;
+        background-color: $color-red;
+        padding: 2em;
+    }
+    .recap{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .orders{
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            i{
+                    font-size: 0.7rem;
+                    cursor: pointer;
+                }
+        }
+        .total{
+            display: flex;
+            flex-direction: column;
+            .price{
+                padding: 1em;
+                display: flex;
+                justify-content: space-between;
+                background-color: gainsboro;
+                
+            }
+            button{
+                font-family: 'Proza libre';
+                font-size: 1rem;
+                align-self: center;
+                margin: 0.7em;
+                padding: 0.3em 1em;
+                width: 30%;
+                border-radius: 50px;
+                border: none;
+                cursor: pointer;
+           
+            }
+            #done{
+                    background-color: $color-green;
+                    color:white;
+                }
+            #cancel{
+                background-color: white;
+                color: $color-red;
+            }
+        }
+    }
+}
+
+@media (min-width:800px) {
+.menu{
+        grid-template-columns: 20% 55% 25%;
+    }
+}
+
 @media (min-width:600px) {
     .back-image{
         left: 8%;
@@ -309,6 +505,7 @@ section{
     .third-section{
         flex-direction: row;
     }
+    
 }
 
 

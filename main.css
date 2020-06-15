@@ -357,6 +357,273 @@ section {
   width: 500px;
 }
 
+.menu {
+  display: none;
+  position: fixed;
+  left: 5%;
+  z-index: 11;
+  background-color: white;
+  width: 90%;
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  top: 12vh;
+}
+
+.sidebar .title {
+  padding: 2em;
+  text-align: center;
+  border-bottom: 1px solid gainsboro;
+}
+
+.meals {
+  display: none;
+}
+
+.meals-mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5em 0;
+  border-bottom: 1px solid gainsboro;
+}
+
+.meals-mobile i, .meals-mobile path {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.meals-mobile i:hover, .meals-mobile path:hover {
+  color: #BE0027;
+  fill: #BE0027;
+}
+
+.main {
+  min-width: 55%;
+}
+
+.pizza .info {
+  padding: 1em;
+}
+
+.pizza .info img {
+  margin-top: 1em;
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+.pizza .type {
+  padding: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.pizza .type .name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 1em;
+}
+
+.pizza .type .name h1 {
+  font-size: 1.4rem;
+}
+
+.pizza .type .name p {
+  font-size: 0.7rem;
+}
+
+.pizza .type .size {
+  padding: 0.2em 0 1em;
+  margin: 0.5em 0 0.2em;
+  border-bottom: 1px solid gainsboro;
+}
+
+.pizza .type .size span {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8rem;
+  margin: 0.5em;
+  padding: 0.4em 0.6em;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  color: #239346;
+}
+
+.pizza .type .size span:last-of-type {
+  color: #BE0027;
+}
+
+.items {
+  border-bottom: 1px solid gainsboro;
+}
+
+.items h1 {
+  font-size: 1rem;
+  margin-left: 1.5em;
+}
+
+.items div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(25px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
+  justify-items: center;
+  padding: 0.7em;
+}
+
+.items div span {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-column: 1/5;
+}
+
+.items div select {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 5;
+  grid-column: 5/10;
+}
+
+.items div i {
+  color: #BE0027;
+}
+
+.items div i:first-of-type {
+  color: #239346;
+}
+
+.add {
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 2em;
+}
+
+.add p {
+  margin: 1em;
+}
+
+.add span {
+  font-family: 'Proza libre';
+  padding: 0.2em 1.5em;
+  position: absolute;
+  left: 40%;
+  top: 12%;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #239346;
+  color: white;
+}
+
+.order .title {
+  font-size: 0.9rem;
+  text-align: center;
+  color: white;
+  background-color: #BE0027;
+  padding: 2em;
+}
+
+.order .recap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.order .recap .orders {
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.order .recap .orders i {
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.order .recap .total {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.order .recap .total .price {
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: gainsboro;
+}
+
+.order .recap .total button {
+  font-family: 'Proza libre';
+  font-size: 1rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 0.7em;
+  padding: 0.3em 1em;
+  width: 30%;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.order .recap .total #done {
+  background-color: #239346;
+  color: white;
+}
+
+.order .recap .total #cancel {
+  background-color: white;
+  color: #BE0027;
+}
+
+@media (min-width: 800px) {
+  .menu {
+    -ms-grid-columns: 20% 55% 25%;
+        grid-template-columns: 20% 55% 25%;
+  }
+}
+
 @media (min-width: 600px) {
   .back-image {
     left: 8%;
