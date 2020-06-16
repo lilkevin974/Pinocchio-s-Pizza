@@ -353,13 +353,15 @@ section {
   font-size: large;
   line-height: 50px;
   letter-spacing: 1px;
+  margin: 0 1em;
   margin-bottom: 3em;
-  width: 500px;
+  max-width: 500px;
 }
 
 .menu {
   display: none;
   position: fixed;
+  border-radius: 10px;
   left: 5%;
   z-index: 11;
   background-color: white;
@@ -380,6 +382,37 @@ section {
 
 .meals {
   display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.meals p {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin: 1em;
+}
+
+.meals div {
+  margin: 0.5em;
+  padding: 0.7em 1.5em;
+  width: 150px;
+  text-align: center;
+  border-radius: 50px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.meals .active {
+  background-color: #BE0027;
+  color: white;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .meals-mobile {
@@ -463,14 +496,26 @@ section {
   margin: 0.5em;
   padding: 0.4em 0.6em;
   border-radius: 50px;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   color: #239346;
 }
 
 .pizza .type .size span:last-of-type {
   color: #BE0027;
+}
+
+.pizza .type .size :nth-child(6) .active, .pizza .type .size :nth-child(3).active {
+  background-color: #BE0027;
+  color: white;
+}
+
+.pizza .type .size .active {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: #239346;
+  color: white;
 }
 
 .items {
@@ -610,6 +655,8 @@ section {
 .order .recap .total #done {
   background-color: #239346;
   color: white;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .order .recap .total #cancel {
@@ -617,10 +664,29 @@ section {
   color: #BE0027;
 }
 
+.back-modal {
+  display: none;
+  z-index: 9;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.5;
+}
+
 @media (min-width: 800px) {
   .menu {
     -ms-grid-columns: 20% 55% 25%;
         grid-template-columns: 20% 55% 25%;
+  }
+  .meals-mobile {
+    display: none;
+  }
+  .meals {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 
