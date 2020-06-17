@@ -1,11 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pinocchio's Pizza</title>
-    <link rel="stylesheet" href="main.css">
-    <script src="app.js"></script>
+    <link rel="stylesheet" href="{% static 'orders/main.css' %}">
+    <script src="{% static 'orders/app.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/lax.js" ></script>
     <script src="https://kit.fontawesome.com/c35fbfe05e.js" crossorigin="anonymous"></script>
 </head>
@@ -24,14 +26,14 @@
             <li><a href=''>About Us</a></li>           
         </ul>
     </nav>
-    <img src="static/images/Background.jpg" alt="" class="background">
+    <img src="{% static 'orders/images/Background.jpg' %}" alt="" class="background">
     <section class='first-section'>
-        <img src="static/images/Group 1.svg" alt="back" class="back-image lax" data-lax-translate-y="0 0, vh -vh">
+        <img src="{% static 'orders/images/Group 1.svg' %}" alt="back" class="back-image lax" data-lax-translate-y="0 0, vh -vh">
         <div class="head-background lax" data-lax-opacity="0 0.7, (0.4*vh) 0">
             <h1 class="title">Pizza and Subs</h1>
             <p class="subtitle">Come to Pinocchio’s and have the best slices of sicilian pizza and mouth-watering steak sandwiches!</p>
         </div>
-        <img src="static/images/image 1.png" alt="back" class="pinocchio lax" data-lax-translate-x="0 0, vh vh" data-lax-opacity="0 1, vh 0">
+        <img src="{% static 'orders/images/image 1.png' %}" alt="back" class="pinocchio lax" data-lax-translate-x="0 0, vh vh" data-lax-opacity="0 1, vh 0">
     </section>
     <section class='second-section'>
         <div class="textbloc lax" data-lax-translate-x="(0.4*vh) -vh, vh 0" data-lax-opacity="(0.4*vh) 0, vh 1">
@@ -48,7 +50,7 @@
         <div class="texbloc2 lax" data-lax-translate-y="(1.4*vh) vh, 2vh (-3.5*vh)" data-lax-opacity="(1.8*vh) 0, (2*vh) 1, (2.2*vh) 0 ">
             <p><span>Noch's</span> has been in business for over 50 years! We've been feeding  <span>Harvard</span> and the surrounding area since <span>1966!</span></p>
         </div>
-        <img src="static/images/Pinocchio 1.jpg" alt="" class="lax"data-lax-opacity="(1.6*vh) 0, (2*vh) 1, (2.4*vh) 0 ">
+        <img src="{% static 'orders/images/Pinocchio 1.jpg' %}" alt="" class="lax"data-lax-opacity="(1.6*vh) 0, (2*vh) 1, (2.4*vh) 0 ">
     </section>
     <section class="fourth-section" >
         <p class="lax" data-lax-translate-x="(2vh) (0.2*vh), (2.1*vh) (-0.2*vh)" data-lax-opacity="2vh 1.5, (2.2*vh) 0">We can make any of our pizzas in about 10 to 15 minutes, and they can be eaten in our dining room or taken out. </p>
@@ -81,7 +83,7 @@
             <div class="pizza">
                 <div class="info">
                     <h1>Pizza</h1>
-                    <img src="static/Images/Pizza.jpg" alt="">
+                    <img src="{% static 'orders/images/Pizza.jpg' %}" alt="">
                 </div>
                 <div class="type">
                     <div class="name">
