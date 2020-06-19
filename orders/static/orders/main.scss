@@ -410,17 +410,34 @@ section{
         padding: 0.7em;
         span{
             grid-column: 1/5;
+            font-size: 0.8rem;
         }
         select{
             grid-column: 5/10;
         }
         i{
             color: $color-red;
+            cursor: pointer;
             &:first-of-type{
                 color: $color-green;
             }
         }
-    }   
+    }
+    button{
+        font-family: 'Proza libre';
+        font-size: 0.8rem;
+        margin: 0.5em 2em 1em;
+        padding: 0.3em 1em;
+        border-radius: 50px;
+        border: none;
+        background-color: white;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        &:hover{
+            color: white;
+            background-color: black;
+        }   
+    }
 }
 .add{
     position: relative;

@@ -11,3 +11,9 @@ class Pizza(models.Model):
 
     def __str__(self):
         return f"{self.size} {self.pizza} Pizza with {self.toppings} toppings ({self.code}) costs {self.price}$"
+
+class Topping(models.Model):
+    topping=models.CharField(max_length=20)
+    
+    def __str__(self):
+        return f"The topping number {self.id} is {self.topping}"
