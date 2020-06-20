@@ -385,7 +385,7 @@ section{
                     color: $color-red;
                 }
             }
-            :nth-child(6) .active, :nth-child(3).active{
+            :nth-child(6) .special, :nth-child(3).special{
                 background-color: $color-red;
                 color: white;
             }
@@ -407,6 +407,7 @@ section{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(25px, 1fr) );
         justify-items: center;
+        align-items: baseline;;
         padding: 0.7em;
         span{
             grid-column: 1/5;
@@ -416,6 +417,7 @@ section{
             grid-column: 5/10;
         }
         i{
+            align-self: center;
             color: $color-red;
             cursor: pointer;
             &:first-of-type{
