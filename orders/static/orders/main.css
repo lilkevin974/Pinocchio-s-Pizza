@@ -582,6 +582,10 @@ section {
   background-color: black;
 }
 
+.unshow {
+  display: none;
+}
+
 .add {
   position: relative;
   -webkit-box-align: center;
@@ -594,7 +598,7 @@ section {
   margin: 1em;
 }
 
-.add span {
+.add button {
   font-family: 'Proza libre';
   padding: 0.2em 1.5em;
   position: absolute;

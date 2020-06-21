@@ -37,16 +37,24 @@ document.addEventListener('DOMContentLoaded', () =>{
 			span.onclick = ()=>{
 				const type=span.dataset.type;
 				const size=span.dataset.size;
-				const special=document.querySelector('.size .special');
+				let special=document.querySelector('.size .special');
 				if(special != null){
 					if(type != special.dataset.type){
-						special.classList.toggle('special');
+						special.classList.toggle('special');	
 					}
 				}
 				
-				if (span==c[2]){
+				if (span==c[2]){	
 					span.classList.toggle('special');
+					let special=document.querySelector('.size .special');
+					if(document.querySelector('.unshow') == null && special!=null){
+						document.querySelector('.items').classList.toggle('unshow')
+					}
+					if(document.querySelector('.unshow') != null && special ==null ){
+						document.querySelector('.items').classList.toggle('unshow')
+					}
 				}
+				
 				else{
 					const current=document.querySelector('.size .active');
 					if (current != null){ 
@@ -75,13 +83,66 @@ window.onload = function() {
 
 function updateprice(){
 	var xhttp = new XMLHttpRequest();
-	const s=document.querySelectorAll('[name="toppings"]');
-	const n=s.length;
-	console.log(n)
+	xhttp.open('POST', '/')
+	xhttp.setRequestHeader("X-CSRFToken",  getCookie('csrftoken')); 
+	xhttp.onload = () => {
+
+		// Extract JSON data from request
+		const data = JSON.parse(xhttp.responseText);
+		console.log(data)
+		const price = document.querySelector('#price')
+		const old= document.querySelector('#price span')
+		if (old !=null){
+			price.removeChild(old)
+		}
+		const span=document.createElement('span');
+		span.innerHTML=data;
+		price.appendChild(span);
+	}
+
+	var data={
+		type: 'Regular',
+		size:'Small',
+		toppings:0,
+		topping1 : 'None',
+		topping2 : 'None',
+		topping3 : 'None',
+	}
+	let s=document.querySelectorAll('[name="toppings"]');
+	let n=s.length;
+	const t= document.querySelector('.size .active');
+	if (t != null){
+		data.type=t.dataset.type;
+		data.size=t.dataset.size
+	}
+	
 	s.forEach(select =>{
+	
 		const topping=select.options[select.selectedIndex].value;
-		console.log(topping)
-	})	
+		const child=select.closest('.items').children;
+		if (select.parentElement== child[1]){
+			data.topping1=topping;
+		}
+		if (select.parentElement== child[2]){
+			data.topping2=topping;
+		}
+		if (select.parentElement== child[3]){
+			data.topping3=topping;
+		}
+		
+		if (topping=="None"){
+			n-=1;
+		}
+	})
+	data.toppings=n;	
+	console.log(data.toppings)
+	console.log(data.type)
+
+	data=JSON.stringify(data)
+
+	xhttp.send(data);
+          return false;
+	
 }
 
 // Add a new line of topping choice when click on new
@@ -102,4 +163,20 @@ function addtopping(){
 		div.innerHTML=`<span>Topping ${n+1} :</span> <select name="toppings" onchange="updateprice()">${text}</select><i class="fas fa-plus"></i><i class="fas fa-times"></i>`;
 		items.insertBefore(div, items.children[n+1])
 	}
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

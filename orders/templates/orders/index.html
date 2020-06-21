@@ -24,7 +24,7 @@
         <ul id='nav-links'>
             <li><a href=''>Home</a></li>           
             <li><a href=''>Menu</a></li>           
-            <li><a href=''>About Us</a></li>           
+            <li><a href="{% url 'account_login'%}">About Us</a></li>           
         </ul>
     </nav>
     <img src="{% static 'orders/images/Background.jpg' %}" alt="" class="background">
@@ -101,9 +101,9 @@
                         <p>24,45 / 38,70</p>
                     </div>
                     <div class="size">
-                        <span data-type='sicilian' data-size='small'>Small</span>
-                        <span data-type='sicilian' data-size='large'>Large</span>
-                        <span data-type='sicilian' data-size='special'>Special</span>
+                        <span data-type='Sicilian' data-size='Small'>Small</span>
+                        <span data-type='Sicilian' data-size='Large'>Large</span>
+                        <span data-type='Sicilian' data-size='special'>Special</span>
                     </div>
                 </div>
             </div>
@@ -124,8 +124,8 @@
                 <button onclick="addtopping()">New</button>
             </div>
             <div class="add">
-                <p>Price:</p>
-                <span>Add to cart</span>
+                <p id="price">Price: </p>
+                <button>Add to cart</button>
             </div>
         </div>
         <div class="order">

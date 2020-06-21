@@ -425,6 +425,7 @@ section{
             }
         }
     }
+    
     button{
         font-family: 'Proza libre';
         font-size: 0.8rem;
@@ -441,6 +442,9 @@ section{
         }   
     }
 }
+.unshow{
+        display: none;
+}
 .add{
     position: relative;
     align-items: center;
@@ -448,7 +452,7 @@ section{
     p{
         margin: 1em;
     }
-    span{
+    button{
         font-family: 'Proza libre';
         padding: 0.2em 1.5em;
         position: absolute;
