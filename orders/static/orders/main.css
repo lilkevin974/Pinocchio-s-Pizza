@@ -358,6 +358,29 @@ section {
   max-width: 500px;
 }
 
+.login-modal {
+  display: none;
+  position: fixed;
+  border-radius: 10px;
+  left: 5%;
+  z-index: 11;
+  background-color: white;
+  width: 50%;
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  top: 12vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
 .menu {
   display: none;
   position: fixed;
@@ -498,8 +521,17 @@ section {
   border-radius: 50px;
   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  -webkit-transition: -webkit-box-shadow 0.15s ease;
+  transition: -webkit-box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
   cursor: pointer;
   color: #239346;
+}
+
+.pizza .type .size span:hover {
+  -webkit-box-shadow: 0px 0.5px 0.5px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0.5px 0.5px rgba(0, 0, 0, 0.25);
 }
 
 .pizza .type .size span:last-of-type {
@@ -604,11 +636,22 @@ section {
   position: absolute;
   left: 40%;
   top: 12%;
+  border: none;
   border-radius: 50px;
-  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
   background-color: #239346;
   color: white;
+  cursor: pointer;
+  -webkit-transition: -webkit-box-shadow 0.250s ease;
+  transition: -webkit-box-shadow 0.250s ease;
+  transition: box-shadow 0.250s ease;
+  transition: box-shadow 0.250s ease, -webkit-box-shadow 0.250s ease;
+}
+
+.add button:hover {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .order .title {

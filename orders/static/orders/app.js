@@ -1,3 +1,17 @@
+
+var data={
+	type: 'Regular',
+	size:'Small',
+	toppings:0,
+	topping1 : 'None',
+	topping2 : 'None',
+	topping3 : 'None',
+	price:0,
+}
+
+var orders=[]
+var numberOrder=0
+
 document.addEventListener('DOMContentLoaded', () =>{
     
     // Show navbar when click on burger in mobile mode
@@ -8,24 +22,23 @@ document.addEventListener('DOMContentLoaded', () =>{
 	
 	// Show modal of the menu
 	document.querySelector('#show-menu').onclick = () =>{
-		document.querySelector('.menu').setAttribute('style','display:grid')
-		document.querySelector('.back-modal').setAttribute('style','display:block')
+		showModal()
 	}
 	// Close the modal of the menu
 	document.querySelector('#cancel').onclick = () =>{
 		document.querySelector('.menu').setAttribute('style','display:none')
 		document.querySelector('.back-modal').setAttribute('style','display:none')
 	}
-
+	// Change css of tabs in menu
 	document.querySelectorAll('.meals div').forEach(div =>{
 		div.onclick = ()=>{
 			const current=document.querySelector('.meals .active');
 			if (current != null){ 
 			current.classList.toggle('active')};
-			div.classList.toggle('active');
-			
+			div.classList.toggle('active');	
 		}
 	})
+	//Change css and select off the different sizes of pizza
 	document.querySelectorAll('.size').forEach(div=>{
 		const c=div.children;
 		var spans=[];
@@ -43,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () =>{
 						special.classList.toggle('special');	
 					}
 				}
-				
 				if (span==c[2]){	
 					span.classList.toggle('special');
 					let special=document.querySelector('.size .special');
@@ -54,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () =>{
 						document.querySelector('.items').classList.toggle('unshow')
 					}
 				}
-				
 				else{
 					const current=document.querySelector('.size .active');
 					if (current != null){ 
@@ -63,11 +74,33 @@ document.addEventListener('DOMContentLoaded', () =>{
 						};
 					}
 					span.classList.toggle('active');
-				}	
+				}
+				updateprice()	
 			}
 		})
-	})
-    
+	}) 
+	
+	document.querySelector('.add button').onclick = () =>{
+		const div=document.createElement('div');
+		const c=document.querySelector('.recap');
+		div.innerHTML=`<p>${data.size} ${data.type} Pizza</p>
+		<span> ${data.price} <i class="fas fa-times" onclick="deleteorders(this)"></i></span>`;
+		div.classList.add('orders')
+		div.dataset.number=numberOrder;
+		const div2=document.querySelector('.total')
+		c.insertBefore(div, div2);
+		const o={
+			type: data.type,
+			size: data.size,
+			toppings: data.toppings,
+			topping1 : data.topping1,
+			topping2 : data.topping2,
+			topping3 : data.topping3,
+			price: data.price,
+		}
+		orders.push(o)
+		numberOrder += 1;
+	}
 })
 
 window.onload = function() {
@@ -80,34 +113,44 @@ window.onload = function() {
 
 	window.requestAnimationFrame(updateLax)
 }
+function showModal(){
+	const xhttp = new XMLHttpRequest();
+	xhttp.open('POST', '/')
+	xhttp.setRequestHeader("X-CSRFToken",  getCookie('csrftoken')); 
+	xhttp.onload = () => {
+		const data = xhttp.responseText;
+		if (data=='non-connected'){
+			document.location.href ="/accounts/login"
+		}
+		else{
+			document.querySelector('.menu').setAttribute('style','display:grid')
+			document.querySelector('.back-modal').setAttribute('style','display:block')
+		}
+	}
+	xhttp.send();
+          return false;
+
+}
 
 function updateprice(){
-	var xhttp = new XMLHttpRequest();
+	const xhttp = new XMLHttpRequest();
 	xhttp.open('POST', '/')
 	xhttp.setRequestHeader("X-CSRFToken",  getCookie('csrftoken')); 
 	xhttp.onload = () => {
 
 		// Extract JSON data from request
-		const data = JSON.parse(xhttp.responseText);
-		console.log(data)
+		const j_data = JSON.parse(xhttp.responseText);
 		const price = document.querySelector('#price')
 		const old= document.querySelector('#price span')
 		if (old !=null){
 			price.removeChild(old)
 		}
 		const span=document.createElement('span');
-		span.innerHTML=data;
+		span.innerHTML=j_data;
 		price.appendChild(span);
+		data.price=j_data;
 	}
 
-	var data={
-		type: 'Regular',
-		size:'Small',
-		toppings:0,
-		topping1 : 'None',
-		topping2 : 'None',
-		topping3 : 'None',
-	}
 	let s=document.querySelectorAll('[name="toppings"]');
 	let n=s.length;
 	const t= document.querySelector('.size .active');
@@ -116,33 +159,39 @@ function updateprice(){
 		data.size=t.dataset.size
 	}
 	
-	s.forEach(select =>{
+	const spe=document.querySelector('.size .special');
+	if (spe != null){
+		n=4
+	}
+
+	if(spe== null){
+		s.forEach(select =>{
+			const topping=select.options[select.selectedIndex].value;
+			const child=select.closest('.items').children;
+			if (select.parentElement== child[1]){
+				data.topping1=topping;
+			}
+			if (select.parentElement== child[2]){
+				data.topping2=topping;
+			}
+			if (select.parentElement== child[3]){
+				data.topping3=topping;
+			}
+			if (topping=="None"){
+				n-=1;
+			}
+		})
+	}
+
 	
-		const topping=select.options[select.selectedIndex].value;
-		const child=select.closest('.items').children;
-		if (select.parentElement== child[1]){
-			data.topping1=topping;
-		}
-		if (select.parentElement== child[2]){
-			data.topping2=topping;
-		}
-		if (select.parentElement== child[3]){
-			data.topping3=topping;
-		}
-		
-		if (topping=="None"){
-			n-=1;
-		}
-	})
 	data.toppings=n;	
 	console.log(data.toppings)
 	console.log(data.type)
 
-	data=JSON.stringify(data)
+	j_data=JSON.stringify(data)
 
-	xhttp.send(data);
-          return false;
-	
+	xhttp.send(j_data);
+          return false;	
 }
 
 // Add a new line of topping choice when click on new
@@ -179,4 +228,13 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function deleteorders(elem){
+	const div=elem.parentElement.parentElement;
+	const number=div.getAttribute("data-number");
+	delete orders[number];
+	div.remove();
+	console.log(orders)	
+	console.log(orders[0])
 }
