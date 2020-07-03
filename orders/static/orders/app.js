@@ -3,12 +3,13 @@ var data={
 	type: 'Regular',
 	size:'Small',
 	toppings:0,
-	topping1 : 'None',
-	topping2 : 'None',
-	topping3 : 'None',
+	topping1 : '',
+	topping2 : '',
+	topping3 : '',
 	price:0,
 }
 
+var total=0
 var orders=[]
 var numberOrder=0
 
@@ -24,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () =>{
 	document.querySelector('#show-menu').onclick = () =>{
 		showModal()
 	}
-	// Close the modal of the menu
+	// Close the modal of the menu 
 	document.querySelector('#cancel').onclick = () =>{
 		document.querySelector('.menu').setAttribute('style','display:none')
 		document.querySelector('.back-modal').setAttribute('style','display:none')
 	}
-	// Change css of tabs in menu
+	// Change css of tabs in menu on click
 	document.querySelectorAll('.meals div').forEach(div =>{
 		div.onclick = ()=>{
 			const current=document.querySelector('.meals .active');
@@ -87,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 		<span> ${data.price} <i class="fas fa-times" onclick="deleteorders(this)"></i></span>`;
 		div.classList.add('orders')
 		div.dataset.number=numberOrder;
+		div.dataset.price=data.price
 		const div2=document.querySelector('.total')
 		c.insertBefore(div, div2);
 		const o={
@@ -100,6 +102,27 @@ document.addEventListener('DOMContentLoaded', () =>{
 		}
 		orders.push(o)
 		numberOrder += 1;
+		total +=data.price
+		const tot=document.querySelector('.price span')
+		tot.innerHTML=total.toFixed(2)
+	}
+
+	document.querySelector('#done').onclick = () =>{
+
+		const xhttp = new XMLHttpRequest();
+		xhttp.open('POST', '/')
+		xhttp.setRequestHeader("X-CSRFToken",  getCookie('csrftoken')); 
+		xhttp.onload = () => {
+			console.log('Works')
+		}
+		
+		definitiveOrder=orders.filter(function(value){return value != null})
+		console.log(definitiveOrder)
+		j_data=JSON.stringify(definitiveOrder)
+		console.log(j_data)
+
+		xhttp.send(j_data);
+          return false;	
 	}
 })
 
@@ -108,7 +131,7 @@ window.onload = function() {
 
 	const updateLax = () => {
 		lax.update(window.scrollY)
-		window.requestAnimationFrame(updateLax)
+		window.requestAnimationFrame(updateLax) 
 	}
 
 	window.requestAnimationFrame(updateLax)
@@ -177,17 +200,13 @@ function updateprice(){
 			if (select.parentElement== child[3]){
 				data.topping3=topping;
 			}
-			if (topping=="None"){
+			if (topping==""){
 				n-=1;
 			}
 		})
 	}
-
-	
 	data.toppings=n;	
-	console.log(data.toppings)
-	console.log(data.type)
-
+	
 	j_data=JSON.stringify(data)
 
 	xhttp.send(j_data);
@@ -235,6 +254,33 @@ function deleteorders(elem){
 	const number=div.getAttribute("data-number");
 	delete orders[number];
 	div.remove();
-	console.log(orders)	
-	console.log(orders[0])
+	total-=div.getAttribute("data-price")
+	const tot=document.querySelector('.price span')
+	tot.innerHTML=total.toFixed(2)
+
 }
+console.log("Sanity check!");
+
+fetch("/config/")
+.then((result) => { return result.json(); })
+.then((data) => {
+  // Initialize Stripe.js
+  
+  const stripe = Stripe(data.publicKey);
+
+  // new
+  // Event handler
+  document.querySelector("#done").addEventListener("click", () => {
+    // Get Checkout Session ID
+    fetch("/create-checkout-session/")
+    .then((result) => { return result.json(); })
+    .then((data) => {
+      console.log(data);
+      // Redirect to Stripe Checkout
+      return stripe.redirectToCheckout({sessionId: data.sessionId})
+    })
+    .then((res) => {
+      console.log(res);
+    });
+  });
+});
